@@ -25,9 +25,8 @@ function NameOfMenu()
 	MenuTitle = "Metier:"
 	ClearMenu()
 	--for command, _ in pairs(JOBS) do
-	for command in pairs(JOBS) do
-		local job = JOBS[command]
-		Menu.addButton(job,"giveJob",job,ped)
+	for command, name in pairs(JOBS) do
+		Menu.addButton(name,"giveJob",name,ped)
 	end
 	
 end
