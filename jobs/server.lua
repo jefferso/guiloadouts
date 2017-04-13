@@ -25,6 +25,7 @@ end)
 RegisterServerEvent("loadout:doJob")
 AddEventHandler("loadout:doJob", function(arg, user)
     TriggerEvent("loadout:doLoadout", source, arg)
+    TriggerClientEvent("loadout:missiontext", source, "Vous avez recu le loadout " .. arg, 5000)
 end)
 
 RegisterServerEvent("loadout:playerSpawned")
