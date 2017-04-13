@@ -6,7 +6,7 @@
 JOBS = {}
 
 local commands = {}
-TriggerServerEvent("loadout:joblist")
+TriggerServerEvent("loadout:joblist", source)
 
 function giveJob(arg)
 	RegisterNetEvent("loadout:doJob")
@@ -25,10 +25,9 @@ function NameOfMenu()
 	MenuTitle = "Metier:"
 	ClearMenu()
 	--for command, _ in pairs(JOBS) do
-	for index, t in pairs(JOBS) do
-		--local job = JOBS[command]
-		Citizen.Trace("idx: " .. index .. " t: " .. tostring(t))
-		Menu.addButton(t.name,"giveJob",t.command,ped)
+	for command, name in pairs(JOBS) do
+		local job = JOBS[command]
+		Menu.addButton(name,"giveJob",name,ped)
 	end
 	
 end

@@ -9,8 +9,9 @@ function getThePerms(user)
 	for command in pairs(commands) do
 		local permission = LOADOUTS[commands[command]].permission_level
 		local command = LOADOUTS[commands[command]].name
-		if user.permission_level >= (permission or 0) then -- Need to have or 0 in case the loadout doesn't have permission_level defined
-			table.insert(thePerms, { ["name"] = command, ["cmd"] = LOADOUTS[command] })
+		if user.permission_level >= (permission) then
+			table.insert(thePerms, command)
+			--table.insert(thePerms, { ["command"] = command, ["name"] = name })
 		end
 	end
 	return thePerms
@@ -25,6 +26,7 @@ end)
 RegisterServerEvent("loadout:doJob")
 AddEventHandler("loadout:doJob", function(arg, user)
     TriggerEvent("loadout:doLoadout", source, arg)
+	TriggerClientEvent("loadout:missiontext", source, "You have been given the loadout " .. arg, 5000)
 end)
 
 RegisterServerEvent("loadout:playerSpawned")
@@ -114,7 +116,7 @@ TriggerEvent("es:addCommand", "loadout", function(source, args, user)
 end)
 
 require "resources/essentialmode/lib/MySQL"
-MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "hahahavousnavezpasditlemotmagique")
+MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "coucouman")
 
 RegisterServerEvent("loadout:getCurrentJob")
 AddEventHandler("loadout:getCurrentJob", function(player)
