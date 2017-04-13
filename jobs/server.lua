@@ -32,6 +32,7 @@ RegisterServerEvent("loadout:doJob")
 AddEventHandler("loadout:doJob", function(jobName)
 	print("Doing job for " .. source .. " = " .. jobName)
     TriggerEvent("loadout:doLoadout", source, tostring(jobName)) -- Make sure it's a string
+    TriggerClientEvent("loadout:missiontext", source, "Vous avez recu le loadout " .. tostring(jobName), 5000)
 end)
 
 RegisterServerEvent("loadout:playerSpawned")

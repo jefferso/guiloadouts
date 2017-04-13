@@ -24,10 +24,12 @@ function NameOfMenu()
 	MenuTitle = "Metier:"
 	ClearMenu()
 	--for command, _ in pairs(JOBS) do
+
 	for index, t in pairs(JOBS) do
 		--local job = JOBS[command]
 		Citizen.Trace("idx: " .. index .. " t: " .. tostring(t))
 		Menu.addButton(t.name, "giveJob", t.cmd)
+
 	end
 	
 end
