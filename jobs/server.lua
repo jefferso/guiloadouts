@@ -5,12 +5,18 @@ for command, _ in pairs(LOADOUTS) do
 end
 
 function getThePerms(user)
+	print("Getting permission: " .. user)
 	local thePerms = {}
+	
 	for command in pairs(commands) do
-		local permission = LOADOUTS[commands[command]].permission_level
-		local command = LOADOUTS[commands[command]].name
+		local c = commands[command] -- For some reason, this gets deleted further down.
+		local permission = LOADOUTS[c].permission_level
+		local command = LOADOUTS[c].name
+		
+		print("c=" .. c .. " , name=" .. command .. " , permission=" .. permission)
+		
 		if user.permission_level >= (permission or 0) then -- Need to have or 0 in case the loadout doesn't have permission_level defined
-			table.insert(thePerms, { ["name"] = command, ["cmd"] = LOADOUTS[command] })
+			table.insert(thePerms, { ["name"] = command, ["cmd"] = c })
 		end
 	end
 	return thePerms
@@ -23,8 +29,9 @@ AddEventHandler("loadout:joblist", function()
 end)
 
 RegisterServerEvent("loadout:doJob")
-AddEventHandler("loadout:doJob", function(arg, user)
-    TriggerEvent("loadout:doLoadout", source, arg)
+AddEventHandler("loadout:doJob", function(jobName)
+	print("Doing job for " .. source .. " = " .. jobName)
+    TriggerEvent("loadout:doLoadout", source, tostring(jobName)) -- Make sure it's a string
 end)
 
 RegisterServerEvent("loadout:playerSpawned")
@@ -34,7 +41,7 @@ end)
 
 RegisterServerEvent("loadout:doLoadout")
 AddEventHandler("loadout:doLoadout", function(player, loadoutName)
-    --print("changing " .. player)
+    --print("changing " .. player .. " to " .. loadoutName)
     local loadout = LOADOUTS[loadoutName]
     local skins, weapons
 
