@@ -114,7 +114,7 @@ TriggerEvent("es:addCommand", "loadout", function(source, args, user)
 end)
 
 require "resources/essentialmode/lib/MySQL"
-MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "coucouman")
+MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "hahahavousnavezpasditlemotmagique")
 
 RegisterServerEvent("loadout:getCurrentJob")
 AddEventHandler("loadout:getCurrentJob", function(player)
