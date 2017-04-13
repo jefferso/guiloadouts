@@ -9,8 +9,8 @@ function getThePerms(user)
 	for command in pairs(commands) do
 		local permission = LOADOUTS[commands[command]].permission_level
 		local command = LOADOUTS[commands[command]].name
-		if user.permission_level >= (permission) then
-			table.insert(thePerms, command)
+		if user.permission_level >= (permission or 0) then -- Need to have or 0 in case the loadout doesn't have permission_level defined
+			table.insert(thePerms, { ["name"] = command, ["cmd"] = LOADOUTS[command] })
 		end
 	end
 	return thePerms
